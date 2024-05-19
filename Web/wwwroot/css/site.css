@@ -1,0 +1,236 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+  background: whitesmoke;
+}
+
+.box {
+    position: relative;
+    border-radius: 3px;
+    background: #ffffff;
+    /*border-top: 3px solid #d2d6de;*/
+    width: 100%;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+}
+
+.box-body {
+    padding: 5px 5px 5px 5px;
+}
+
+.box-header {
+    font-weight: bold;
+    border-bottom: 1px solid #b0cfab;
+}
+
+.box-info {
+    border-top: 4px solid #789cd4;
+    padding: 0px 5px;
+    margin: 0px 10px;
+}
+
+.box-default {
+    border-top: 4px solid #f9f3f3;
+    padding: 0px 5px;
+    margin: 0px 10px;
+}
+
+.box-success {
+    border-top: 2px solid green;
+    border-bottom: 1px solid #b0cfab;
+}
+
+.form-group .control-label {
+    text-align: left;
+    color: #000;
+    padding-right: 0px;
+    padding-left: 4px;
+}
+
+input.form-control, select.form-control {
+    height: 25px !important;
+    padding: 0px 5px;
+    font-size: 15px;
+}
+
+textarea.form-control {
+    padding: 0px 5px;
+    margin-bottom: 5px;
+    font-size: 15px;
+}
+
+input:focus, .select2-selection--single:focus, textarea:focus, button:focus, a.focus {
+    background-color: #fdff72 !important;
+    color: black !important;
+    border: 2px solid black !important;
+    border-color: #000000;
+    transition: all 100ms;
+}
+
+.form-control {
+    border-radius: 0px;
+    border: 1px solid #54a8dd;
+}
+
+.form-group {
+    margin-bottom: 5px;
+}
+
+.text-end {
+    text-align: right;
+}
+
+#mytable[aria-describedby='mytable_info'] {
+    width: 100%;
+}
+
+.table td {
+    padding: 0px 0px;
+}
+
+.table th {
+    padding: 0px 10px;
+    background: gainsboro;
+    border: 2px solid #716c848f !important;
+}
+
+.ui-menu > tr > td, .ui-menu-item > tr > th {
+    border: 1px solid #ddd;
+    padding: 2px;
+    font-size: 12px;
+}
+
+thead.ui-menu-item > tr:first-child {
+    pointer-events: none;
+    background: #337ab7;
+    color: #fff;
+}
+
+    thead.ui-menu-item > tr:first-child th {
+        font-size: 14px;
+        padding: 6px;
+    }
+
+.ui-widget.ui-widget-content {
+    border-color: #aeb2cd;
+    color: #000000;
+    width: auto !important;
+    background: #fafafaf0;
+}
+
+    .ui-widget.ui-widget-content .ui-state-active, thead.ui-menu-item:not(), tr.ui-menu-item:hover td {
+        background: #bfc5cd !important;
+        color: #000 !important;
+    }
+
+
+label {
+    margin-bottom: 3px;
+}
+
+.container-center {
+    margin: auto;
+}
+
+.table-scrollable table thead th {
+    text-align: center;
+}
+
+.table-scrollable {
+    height: 350px;
+    overflow-x: auto;
+}
+
+input[type="button"] {
+    padding: 0px 10px;
+    margin: 0 0 1px 0;
+}
+
+.disabled {
+    opacity: 0.80;
+    background: #eeeeee;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+.none, .hidden {
+    display: none !important;
+}
+
+.error {
+    color: red;
+    /*font-style: italic;*/
+    font-family: none;
+}
+
+.custom-select {
+    width: 50px !important;
+}
+
+.btn {
+    padding: 0px 10px 0px 10px;
+    border-radius: 2px;
+    text-transform: capitalize;
+}
+
+/* Payment Method */
+.payment-area input {
+    text-align: right;
+}
+
+.payment-method .navigation {
+    text-align: center;
+    width: 100%;
+    margin: 2px;
+    padding: 0;
+    list-style: none;
+    border-bottom: 1px solid #428BCA;
+    border-top: 1px solid #428BCA;
+}
+
+.navigation li {
+    margin: 0;
+    padding: 0;
+    display: inline-flex;
+}
+
+    .navigation li a {
+        padding: 0px 20px;
+        float: left;
+        color: black;
+        font-weight: 700;
+        font-size: 15px !important;
+    }
+
+    .navigation li.active a {
+        background: #428BCA;
+        color: #fff;
+    }
+
+.user-body .tab-content .tab-pane {
+    padding: 5px 0px 0px 0px;
+}
+
+.user-body .tab-content > div {
+    float: left;
+    width: 100%;
+}
+
+.user-body .tab-content h4 {
+    width: 100%;
+    margin: 10px 0;
+    color: #333;
+}

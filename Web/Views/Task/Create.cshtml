@@ -1,0 +1,351 @@
+﻿@model Web.ViewModels.VMCustomer
+@{
+    ViewBag.Title = "Company Registration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .box-default {
+        margin-bottom: 10px
+    }
+
+    td {
+        height: 30px;
+    }
+</style>
+
+<div class="row">
+    <div class="col-10 container-center">
+        @using (Html.BeginForm("Save", "Task", FormMethod.Post, htmlAttributes: new { id = "validate", autocomplete = "off" }))
+        {
+            <div class="box box-info" style="margin-bottom:10px">
+                <div class="box-header">
+                    <h4 class="box-title">Meeting Minutes</h4>
+                </div>
+                <div class="box-body">
+
+                    @Html.AntiForgeryToken()
+                    <div class="form-group row">
+                        <div class="col-1"></div>
+                        <div class="col-1" style="text-align:right">
+                            @Html.RadioButtonFor( z => z.Customer.CustomerType, "Corporate", new{Onclick="GetCustomer(value)"})
+                        </div>
+                        <label class="col-2" style="text-align:left">Corporate</label>
+
+                        <div class="col-1" style="text-align:right">
+                            @Html.RadioButtonFor( z => z.Customer.CustomerType, "Individual", new{Onclick="GetCustomer(value)"})
+                        </div>
+                        <label class="col-2" style="text-align:left">Individual</label>
+                    </div>
+                    <hr />
+                    <div class="form-group row">
+                        <div class="col-6">
+                            <div class="form-group row">
+                                @Html.LabelFor(z => z.Customer.Name, new { @class = "col-4 control-label" })
+                                <div class="col-8">
+                                    @Html.DropDownListFor(z => z.Customer.Name, new SelectList(Model.Customers, "Id", "Name"), ("select customer name"), new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(z => z.Customer.Name, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                @Html.LabelFor(z => z.Customer.AgendaDate, new { @class = "col-4 control-label" })
+                                <div class="col-3">
+                                    @Html.TextBoxFor(z => z.Customer.AgendaDate, new { @class = "form-control datepicker" })
+                                    @Html.ValidationMessageFor(z => z.Customer.AgendaDate, "", new { @class = "text-danger" })
+                                </div>
+
+                                @Html.LabelFor(z => z.Customer.AgendaTime, new { @class = "col-2 control-label" })
+                                <div class="col-3">
+                                    @Html.TextBoxFor(z => z.Customer.AgendaTime, new { @class = "form-control datetimepicker" })
+                                    @Html.ValidationMessageFor(z => z.Customer.AgendaTime, "", new { @class = "text-danger " })
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                @Html.LabelFor(z => z.Customer.MeetingPlace, new { @class = "col-4 control-label" })
+                                <div class="col-8">
+                                    @Html.TextBoxFor(z => z.Customer.MeetingPlace, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(z => z.Customer.MeetingPlace, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                @Html.LabelFor(z => z.Customer.AttendsFromClientSide, new { @class = "col-4 control-label" })
+                                <div class="col-8">
+                                    @Html.TextAreaFor(z => z.Customer.AttendsFromClientSide, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(z => z.Customer.AttendsFromClientSide, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                @Html.LabelFor(z => z.Customer.AttendsFromHostSide, new { @class = "col-4 control-label" })
+                                <div class="col-8">
+                                    @Html.TextAreaFor(z => z.Customer.AttendsFromHostSide, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(z => z.Customer.AttendsFromHostSide, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="form-group row">
+                                @Html.LabelFor(z => z.Customer.MeetingAgenda, new { @class = "col-4 control-label" })
+                                <div class="col-8">
+                                    @Html.TextAreaFor(z => z.Customer.MeetingAgenda, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(z => z.Customer.MeetingAgenda, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                @Html.LabelFor(z => z.Customer.Discussion, new { @class = "col-4 control-label" })
+                                <div class="col-8">
+                                    @Html.TextBoxFor(z => z.Customer.Discussion, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(z => z.Customer.Discussion, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                @Html.LabelFor(z => z.Customer.Decision, new { @class = "col-4 control-label" })
+                                <div class="col-8">
+                                    @Html.TextAreaFor(z => z.Customer.Decision, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(z => z.Customer.Decision, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box box-default">
+                <div class="box-body">
+                    <div class="form-group row">
+                        <div class="col-12">
+                            <div class="form-group row">
+                                @Html.LabelFor(z => z.Products_Service.Id, new { @class = "col-2 control-label" })
+                                <div class="col-5">
+                                    @Html.DropDownListFor(z => z.Products_Service.Id, new SelectList(Model.Products_Services, "Id", "Name"), ("select product/service interested"), new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(z => z.Products_Service.Id, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                @Html.LabelFor(z => z.Products_Service.Quantity, new { @class = "col-2 control-label" })
+                                <div class="col-2">
+                                    @Html.TextBoxFor(z => z.Products_Service.Quantity, new { @class = "form-control isnumber" })
+                                    @Html.ValidationMessageFor(z => z.Products_Service.Quantity, "", new { @class = "text-danger" })
+                                </div>
+
+                                @Html.LabelFor(z => z.Products_Service.Unit, new { @class = "col-1 control-label" })
+                                <div class="col-2">
+                                    @Html.TextBoxFor(z => z.Products_Service.Unit, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(z => z.Products_Service.Unit, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <a class="btn btn-outline-info" id="btnAdd"><i class="bi bi-plus-square"></i>&nbsp; Add </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box box-default">
+                <div class="box-body">
+                    <table class="table-bordered" style="min-height:150px">
+                        <thead>
+                            <tr>
+                                <th class="col-1 text-center"> SL# </th>
+                                <th class="col-6"> Interested Product/Service Name </th>
+                                <th class="col-3"> Quantity </th>
+                                <th class="col-3"> Unit </th>
+                                <th class="col-0"> Edit </th>
+                                <th class="col-0"> Delete </th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="box box-default">
+                <a class="btn btn-outline-info" id="btnSave"><i class="bi bi-floppy"></i>&nbsp; Save </a>
+                <a class="btn btn-outline-info" id="btnAdd"><i class="bi bi-arrow-repeat"></i>&nbsp; Refresh </a>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(function () {
+            $(".datepicker").datepicker({
+                changeYear: true,
+                changeMonth: true,
+                dateFormat: 'yy-mm-dd'
+            }).datepicker("setDate", new Date());
+
+            $(".datepicker").datepicker("option", "showAnim", "slide");
+
+            $('.datetimepicker').timepicker({
+                format: 'Y-m-d H:i',
+            }).attr("autocomplete", "off");
+        });
+
+
+        $("#btnAdd").click(function () {
+            let productServiceName = $('#Products_Service_Id option:selected').text();
+            let productServiceId = $('#Products_Service_Id option:selected').val();
+            let quantity = $("#Products_Service_Quantity").val();
+            let unit = $("#Products_Service_Unit").val();
+
+            var valid = validate();
+            if (valid == false) {
+                return false;
+            }
+
+            var html = "<tr>" +
+                "<td style='height:30px' class='col-sm-1 serviceId'>" + productServiceId + "</td>" +
+                "<td style='height:30px' class='col-sm-3 serviceName'>" + productServiceName + "</td>" +
+                "<td style='height:30px' class='col-sm-1 quantity'>" + quantity + "</td>" +
+                "<td style='height:30px' class='col-sm-3 unit'>" + unit + "</td>" +
+                "<td style='height:30px'><a href='javascript:;' class='editRow'><i class='bi bi-pencil-square'></i></a> </td>" +
+                "<td style='height:30px'><a href='#' class='deleteRow'><i class='bi bi-trash'></i></a></td>" +
+                "</tr>";
+            $('#tbody').append(html);
+            return false;
+        })
+
+        $("table #tbody").on("click", "a.deleteRow", function (event) {
+            event.preventDefault();
+            $(this).closest('tr').remove();
+            return false;
+        });
+
+        function validate() {
+            var isValid = true;
+            var table = $("table #tbody");
+            var itemId = $("#Products_Service_Id option:selected").val();
+            table.find('tr').each(function (i) {
+                var $tds = $(this).find('td'),
+                    tableValue = $tds.eq(0).text();
+                if (tableValue == itemId) {
+                    alert("Already Exist");
+                    isValid = false;
+                }
+            });
+
+            return isValid
+        }
+
+        $("table #tbody").on("click", "a.editRow", function (event) {
+            var serviceId = $(this).closest('tr').find('.serviceId').text();
+            var serviceName = $(this).closest('tr').find('.serviceName').text();
+            var quantity = $(this).closest('tr').find('.quantity').text();
+            var unit = $(this).closest('tr').find('.unit').text();
+            //console.log(serviceId, serviceName, quantity, unit); return false;
+
+            $("#Products_Service_Id").val(serviceId);
+            $("#Products_Service_Quantity").val(quantity);
+            $("#Products_Service_Unit").val(unit);
+            $(this).closest('tr').remove();
+        });
+
+        function GetCustomer(param) {
+
+            $('#Customer_Name').empty();
+            $.ajax({
+                type: "GET",
+                url: "@Url.Action("GetCustomer", "Task")",
+                dataType: "Json",
+                data: { 'customerType': param },
+                success: function (data) {
+
+                    $('#Customer_Name').append("<option value=''>select customer name</option>");
+
+                    if (data.length > 0) {
+                        $.each(data, function (key, item) {
+                            var rows = "<option value='" + item.id + "'>" + item.name + "</option>";
+                            $('#Customer_Name').append(rows);
+                        });
+                    }
+
+                },
+                error: function (errormessage) {
+                    alert(errormessage.responseText);
+                }
+            });
+        }
+    </script>
+
+    <script>
+        $("#btnSave").click(function (event) {
+            event.preventDefault();
+
+            //if ($("#validate").valid()) {
+            var tbody = $("#tbody");
+            if (tbody.children().length > 0) {
+
+                var products = [];
+                var table = $('table #tbody');
+                table.find('tr').each(function () {
+                    var $tds = $(this).find('td'),
+                        tId = $tds.eq(0).text(),
+                        tName = $tds.eq(1).text(),
+                        tQuantity = $tds.eq(2).text(),
+                        tUnit = $tds.eq(3).text()
+                    var product = {
+                        Id: tId,
+                        Name: tName,
+                        Quantity: tQuantity,
+                        Unit: tUnit,
+                    };
+                    products.push(product);
+                });
+
+                var customer = {
+                    CustomerType: $("#Customer_CustomerType:checked").val(),
+                    Name: $("#Customer_Name option:selected").text(),
+                    MeetingAgenda: $("#Customer_MeetingAgenda").val(),
+                    AgendaDate: $("#Customer_AgendaDate").val(),
+                    AgendaTime: $("#Customer_AgendaTime").val(),
+                    MeetingPlace: $("#Customer_MeetingPlace").val(),
+                    AttendsFromClientSide: $("#Customer_AttendsFromClientSide").val(),
+                    AttendsFromHostSide: $("#Customer_AttendsFromHostSide").val(),
+                    Discussion: $("#Customer_Discussion").val(),
+                    Decision: $("#Customer_Decision").val(),
+                }
+
+                var _data = {
+                    "Customer": customer,
+                    "Products_Services" : products
+                }
+                console.log(_data); //return false;
+
+                $.ajax({
+                    type: "post",
+                    url: "/Task/Save",
+                    data: _data,
+                    datatype: "json",
+                    //cache: false,
+                    success: function (data) {
+                        window.location.href = data.redirecturl;
+                    }
+
+                    //type: "POST",
+                    //url: '@Url.Action("Save", "Task")',
+                    //data: common,
+                    //contentType: "application/json; charset=utf-8",
+                    //datatype: "json",
+                    //success: function (data) {
+
+                });
+                                //});
+        return false;
+                            }
+                            //}
+                            else {
+            alert("Have to add at least one product/service");
+        }
+                        })
+    </script>
+}
